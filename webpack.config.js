@@ -4,29 +4,37 @@ var path = require('path');
 
 module.exports = {
     context: path.join(__dirname, "src"),
-    devtool: debug ? "inline-sourcemap" : null,
-    entry: "./app/index.js",
-    module: {
-        loaders: [{
-            test: /\.js?$/,
-            exclude: /(node_modules|bower_components)/,
-            loader: 'babel-loader',
-            query: {
-                presets: ['react', 'es2015', 'stage-0'],
-                plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties'],
-            }
-        }]
-    },
+    entry: "./client/client.jsx",
     output: {
-        path: __dirname + "/src/",
-        filename: "index.min.js"
+        path: path.join(__dirname,"/src/"),
+        filename: "client.bundle.js"
     },
-    plugins: debug ? [] : [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            mangle: false,
-            sourcemap: false
-        }),
-    ],
+
+    devtool: debug
+        ? "inline-sourcemap"
+        : null,
+
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel-loader',
+                query: {
+                    presets: [
+                        'react', 'es2015', 'stage-0'
+                    ],
+                    plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties']
+                }
+            }
+        ]
+    },
+
+    plugins: debug
+        ? []
+        : [
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurenceOrderPlugin(),
+            new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false})
+        ]
 };
