@@ -4,9 +4,10 @@ var path = require('path');
 
 module.exports = {
     context: path.join(__dirname, "src"),
-    entry: "./client/client.jsx",
+    entry: "./client.jsx",
     output: {
-        path: path.join(__dirname,"/src/"),
+        path: path.join(__dirname, "public"),
+        publicPath: "/js/",
         filename: "client.bundle.js"
     },
 
@@ -26,6 +27,9 @@ module.exports = {
                     ],
                     plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties']
                 }
+            }, {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },
