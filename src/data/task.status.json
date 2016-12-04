@@ -1,0 +1,13 @@
+[{
+    "label": "New"
+}, {
+    "label": "Committed"
+}, {
+    "label": "In Progress"
+}, {
+    "label": "Complete"
+}, {
+    "label": "Deferred"
+}, {
+    "label": "Closed"
+}]

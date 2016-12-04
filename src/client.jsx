@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Components
-import Layout from './pages/Layout.jsx';
+import Tasks from './containers/Tasks.jsx';
 
 const app = document.getElementById('app');
-ReactDOM.render( <Layout title="Get Things Done"/> , app);
+ReactDOM.render( <Tasks title="Get Things Done"/> , app);
