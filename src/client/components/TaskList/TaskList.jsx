@@ -6,9 +6,7 @@ import FilterButton from '../FilterButton/FilterButton.jsx';
 export default class TaskList extends React.Component {
     static propTypes = {
         tasks: React.PropTypes.array.isRequired,
-        activeTask: React.PropTypes.object.isRequired,
-        onSelect: React.PropTypes.func.isRequired,
-        statusList: React.PropTypes.array.isRequired
+        onSelect: React.PropTypes.func.isRequired
     }
     render() {
         return (
