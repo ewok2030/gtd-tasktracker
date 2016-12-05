@@ -29,12 +29,12 @@ export default class TaskListItem extends React.Component {
     }
     render() {
         return (
-            <a href="#" className="list-group-item" onClick={this.itemClicked.bind(this)}>
+            <li className="list-group-item" onClick={this.itemClicked.bind(this)}>
                 <h4 class="list-group-item-heading">
                     {this.renderIcon()}&nbsp;{this.props.title}</h4>
                 <p class="list-group-item-text">{this.props.status}</p>
                 <p class="list-group-item-text">{this.props.description}</p>
-            </a>
+            </li>
         );
     }
 };
