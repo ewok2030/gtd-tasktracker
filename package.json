@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base public",
-    "webpack": "./node_modules/.bin/webpack",
-    "start": "node src/server.js"
+    "dev": "webpack-dev-server --content-base public",
+    "webpack": "webpack",
+    "start": "node src/server/server.js"
   },
   "repository": {
     "type": "git",
