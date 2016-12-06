@@ -1,12 +1,12 @@
 import React from 'react';
 
-import FilterButtonOption from './FilterButtonOption/FilterButtonOption.jsx';
+import FilterButtonOption from './FilterButtonOption/FilterButtonOption';
 
 export default class FilterButton extends React.Component {
     static propTypes = {
         options: React.PropTypes.array.isRequired
     }
-    
+
     render() {
         return (
             <div class="button-group">

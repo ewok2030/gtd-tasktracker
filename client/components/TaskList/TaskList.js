@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TaskListItem from './TaskListItem/TaskListItem.jsx';
-import FilterButton from '../FilterButton/FilterButton.jsx';
+import TaskListItem from './TaskListItem/TaskListItem';
+import FilterButton from '../FilterButton/FilterButton';
 
 export default class TaskList extends React.Component {
     static propTypes = {

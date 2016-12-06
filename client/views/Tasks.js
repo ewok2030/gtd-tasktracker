@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Components
-import TaskList from "../components/TaskList/TaskList.jsx";
-import TaskEditor from "../components/TaskEditor/TaskEditor.jsx";
+import TaskList from "../components/TaskList/TaskList";
+import TaskEditor from "../components/TaskEditor/TaskEditor";
 // Stores
-import TaskStore from "../stores/TaskStore.jsx";
+import TaskStore from "../stores/TaskStore";
 
 export default class Tasks extends React.Component {
     constructor() {

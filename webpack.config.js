@@ -8,10 +8,10 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
-        path.join(__dirname, 'client/client.jsx')
+        path.join(__dirname, 'client/client.js')
     ],
     output: {
-        path: path.join(__dirname, '/dist/'),
+        path: path.join(__dirname, '/build/public'),
         filename: '[name].js',
         publicPath: '/'
     },
@@ -25,7 +25,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
+                test: /\.js?$/,
                 exclude: /node_modules/,
                 loader: 'babel',
                 query: {
