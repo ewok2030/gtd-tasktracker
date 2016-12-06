@@ -1,33 +1,31 @@
 /**
  * Module dependencies.
  */
-const path = require('path');
-const compression = require('compression');
-const express = require('express');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('../webpack.config.js');
+import path from 'path';
+import compression from 'compression';
+import express from 'express';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from '../webpack.config.js';
 
 const debug = process.env.NODE_ENV !== 'production';
-
 /**
  * Create Express server.
  */
 const app = express();
 app.set('port', process.env.PORT || 3000);
-app.use(compression());
-//app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
+//app.use(compression());
 
 /**
  * Route handlers
  */
-const taskRoutes = require('./routes/Task.routes');
+const taskRoutes = require('./routes/Task.routes.jsx');
 
 /**
  * API routes
  */
-app.use('/api/tasks', taskRoutes);
+app.use('/api/tasks', taskRoutes.default);
 
 // Enable webpack middleware if in debug mode
 if (debug) {
