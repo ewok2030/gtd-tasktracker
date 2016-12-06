@@ -1,7 +1,7 @@
-import Task from '../models/Task.model';
+import Project from '../models/Project.model';
 
-export function getTasks(req, res) {
-    Task.find().sort('-dateCreated').exec((err, docs) => {
+export function getProjects(req, res) {
+    Project.find().sort('+name').exec((err, docs) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -9,8 +9,8 @@ export function getTasks(req, res) {
     });
 }
 
-export function getTask(req, res) {
-    Task.findOne({_id: req.params.id}).exec((err, doc) => {
+export function getProject(req, res) {
+    Project.findOne({_id: req.params.id}).exec((err, doc) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -18,13 +18,13 @@ export function getTask(req, res) {
     });
 }
 
-export function addTask(req, res) {
+export function addProject(req, res) {
     // Check for required fields
-    if (!req.body.task.title || !req.body.post.status || !req.body.post.dateCreated) {
+    if (!req.body.project.name || !req.body.project.isActive) {
         res.status(403).end();
     }
 
-    const newDoc = new Task(req.body.task);
+    const newDoc = new Project(req.body.project);
 
     newDoc.save((err, saved) => {
         if (err) {
@@ -34,8 +34,8 @@ export function addTask(req, res) {
     });
 }
 
-export function deleteTask(req, res) {
-    Task.findOne({_id: req.params.id}).exec((err, doc) => {
+export function deleteProject(req, res) {
+    Project.findOne({_id: req.params.id}).exec((err, doc) => {
         if (err) {
             res.status(500).send(err);
         }
