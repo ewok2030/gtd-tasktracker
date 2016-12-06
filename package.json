@@ -1,9 +1,11 @@
 {
   "name": "gtd-tasktracker",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon ./server/server.js"
+    "dev": "nodemon --exec babel-node ./server/server.jsx",
+    "build": "babel server --out-dir dist",
+    "start": "node dist/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
     "react-router": "^3.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-loader": "^6.2.8",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.19.0",
