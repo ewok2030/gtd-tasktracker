@@ -2,6 +2,7 @@
     "restartable": "rs",
     "ignore": [
         ".git",
+        "build",
         "node_modules/**/node_modules"
     ],
     "verbose": true,
@@ -11,5 +12,5 @@
     "env": {
         "NODE_ENV": "development"
     },
-    "ext": "js jsx json"
+    "ext": "js json"
 }

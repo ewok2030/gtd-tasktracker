@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import {Router, Route, IndexRoute, hashHistory} from "react-router";
 
 // Views
-import Layout from './views/Layout.jsx';
-import Tasks from './views/Tasks.jsx';
-import Today from './views/Today.jsx';
-import Projects from './views/Projects.jsx';
-import Settings from './views/Settings.jsx';
+import Layout from './views/Layout';
+import Tasks from './views/Tasks';
+import Today from './views/Today';
+import Projects from './views/Projects';
+import Settings from './views/Settings';
 
 const app = document.getElementById('app');
 ReactDOM.render(

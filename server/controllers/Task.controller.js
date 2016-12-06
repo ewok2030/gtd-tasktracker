@@ -1,4 +1,4 @@
-import Task from '../models/Task.model.jsx';
+import Task from '../models/Task.model';
 
 const taskList = [
     {
