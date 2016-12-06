@@ -1,6 +1,4 @@
-'use strict';
-
-//let Task = tequire('../models/Task.model');
+import Task from '../models/Task.model.jsx';
 
 const taskList = [
     {
@@ -26,18 +24,18 @@ const taskList = [
     }
 ];
 
-exports.getAll = (req, res) => {
+export function getTasks(req, res) {
     res.json(taskList);
 }
 
-exports.get = (req, res) => {
+export function getTask(req, res) {
     res.status(200).json(taskList.find(t => t.id === res.parmams.id));
 }
 
-exports.add = (req, res) => {
+export function addTask(req, res) {
     res.send('Task Added!');
 }
 
-exports.delete = (req, res) => {
+export function deleteTask(req, res) {
     res.status(200).end();
 }
