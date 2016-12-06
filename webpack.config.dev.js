@@ -1,26 +1,34 @@
-var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 
-module.exports = {
-    context: path.join(__dirname, "src"),
-    entry: "./client/client.jsx",
-    output: {
-        path: path.join(__dirname, "public"),
-        publicPath: "/js/",
-        filename: "client.bundle.js"
-    },
+var debug = process.env.NODE_ENV !== "production";
 
+module.exports = {
     devtool: debug
         ? "inline-sourcemap"
         : null,
+
+    entry: "./client/client.jsx",
+
+    output: {
+        path: __dirname,
+        filename: 'client.bundle.js',
+        publicPath: 'http://0.0.0.0:8000/js/'
+    },
+
+    resolve: {
+        extensions: [
+            '', '.js', '.jsx'
+        ],
+        modules: ['client', 'node_modules']
+    },
 
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
+                loader: 'babel',
                 query: {
                     presets: [
                         'react', 'es2015', 'stage-0'
@@ -34,11 +42,13 @@ module.exports = {
         ]
     },
 
-    plugins: debug
-        ? []
-        : [
-            new webpack.optimize.DedupePlugin(),
-            new webpack.optimize.OccurenceOrderPlugin(),
-            new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false})
-        ]
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                CLIENT: JSON.stringify(true),
+                'NODE_ENV': JSON.stringify('development')
+            }
+        })
+    ]
 };
