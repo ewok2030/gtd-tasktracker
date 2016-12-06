@@ -28,7 +28,7 @@ const taskRoutes = require('./routes/Task.routes');
  * API routes
  */
 app.use('/api/tasks', taskRoutes);
-console.log(JSON.stringify(app._router.stack))
+
 // Enable webpack middleware if in debug mode
 if (debug) {
     const compiler = webpack(config);
