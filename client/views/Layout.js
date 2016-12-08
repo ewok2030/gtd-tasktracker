@@ -6,11 +6,10 @@ import Footer from "../components/Footer";
 
 export default class Layout extends React.Component {
     render() {
-        const {location} = this.props;
         return (
             <div>
-                <Header location={location}/>
-                <div class="container">
+                <Header location={this.props.location}/>
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
                             {this.props.children}
