@@ -6,16 +6,15 @@ import FilterButton from '../FilterButton/FilterButton';
 export default class TaskList extends React.Component {
     static propTypes = {
         tasks: React.PropTypes.array.isRequired,
-        onSelect: React.PropTypes.func.isRequired
+        onClick: React.PropTypes.func.isRequired,
+        activeTaskId: React.PropTypes.string
     }
     render() {
         return (
-            <div>
-                <div className="row">
-
-                </div>
+            <div className="panel panel-default">
+                <div className="panel-heading"><strong>Tasks</strong></div>
                 <div className="list-group">
-                    {this.props.tasks.map(t => <TaskListItem key={t.id} id={t.id} title={t.title} status={t.status} description={t.description} onSelect={this.props.onSelect}/>)}
+                    {this.props.tasks.map(t => <TaskListItem key={t._id} id={t._id} title={t.title} status={t.status} description={t.description} onClick={this.props.onClick} isSelected={t._id == this.props.activeTaskId}/>)}
                 </div>
             </div>
         );
