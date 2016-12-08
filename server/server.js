@@ -72,6 +72,7 @@ if (isDevelopment) {
 
     app.use(middleware);
     app.use(webpackHotMiddleware(compiler));
+    // TODO: Cant use browserHistory because all routes get redirected here. ALso, need to support api
     app.get('/', function response(req, res) {
         res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'public/index.html')));
         res.end();
