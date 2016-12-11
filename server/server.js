@@ -3,6 +3,7 @@
  */
 import path from 'path';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import express from 'express';
 import webpack from 'webpack';
 import mongoose from 'mongoose';
@@ -39,7 +40,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 const app = express();
 app.set('port', serverConfig.port);
 app.use(compression());
-
+app.use(bodyParser.json());
 /**
  * Route handlers
  */

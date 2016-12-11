@@ -5,14 +5,15 @@ import TaskList from "../components/TaskList/TaskList";
 import TaskEditor from "../components/TaskEditor/TaskEditor";
 import ProjectList from "../components/ProjectList/ProjectList";
 // Actions
-import {fetchTasks} from "../actions/fetchTasks.action.js";
-import {selectTask} from "../actions/selectTask.action.js";
-import {fetchProjects} from "../actions/fetchProjects.action.js";
-import {selectProject} from "../actions/selectProject.action.js";
+import {fetchTasks} from "../actions/fetchTasks.action";
+import {selectTask} from "../actions/selectTask.action";
+import {fetchProjects} from "../actions/fetchProjects.action";
+import {selectProject} from "../actions/selectProject.action";
+import {updateTask} from "../actions/updateTask.action";
 
 // Map store state to component's properties
 const mapStateToProps = (state, ownProps) => {
-    return {tasks: state.fetchTasks.data, activeTaskId: state.activeTask.data.id, projects: state.fetchProjects.data};
+    return {tasks: state.fetchTasks.data, activeTask: state.activeTask.data, projects: state.fetchProjects.data};
 };
 
 // Map actions to component's properties
@@ -29,6 +30,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         selectProject: (projectId) => {
             dispatch(selectProject(projectId));
+        },
+        updateTask: (id, task) => {
+            dispatch(updateTask(id, task));
         }
     }
 };
@@ -50,9 +54,11 @@ export default class Tasks extends React.Component {
     }
 
     render() {
-        const currentActiveTask = (this.props.activeTaskId == null)
-            ? null
-            : this.props.tasks.find(t => t._id === this.props.activeTaskId);
+        const editor = (this.props.activeTask == null)
+            ? <div className="well">
+                    <small>Select a task to edit</small>
+                </div>
+            : <TaskEditor task={this.props.activeTask} updateTask={this.props.updateTask}/>;
         return (
             <div>
                 <h2>{this.state.viewTitle}</h2>
@@ -62,10 +68,10 @@ export default class Tasks extends React.Component {
                             <ProjectList projects={this.props.projects} onClick={this.props.selectProject}/>
                         </div>
                         <div className="col-md-4">
-                            <TaskList tasks={this.props.tasks} onClick={this.props.selectTask} activeTaskId={this.props.activeTaskId}/>
+                            <TaskList tasks={this.props.tasks} onClick={this.props.selectTask} activeTask={this.props.activeTask}/>
                         </div>
                         <div className="col-md-6">
-                            <TaskEditor task={currentActiveTask}/>
+                            {editor}
                         </div>
                     </div>
                 </div>

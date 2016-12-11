@@ -11,6 +11,9 @@ router.route('/:id').get(taskController.getTask);
 // Create
 router.route('/').post(taskController.addTask);
 
+// Update
+router.route('/:id').put(taskController.updateTask);
+
 // Delete
 router.route('/:id').delete(taskController.deleteTask);
 

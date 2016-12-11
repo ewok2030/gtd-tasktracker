@@ -1,4 +1,4 @@
-import {FETCH_TASKS, FETCH_TASKS_ERROR} from '../actions/actions.types';
+import {FETCH_TASKS, FETCH_TASKS_ERROR, UPDATE_TASK} from '../actions/actions.types';
 
 const initialState = {
     data: []
@@ -16,6 +16,17 @@ const fetchTasks = (state = initialState, action) => {
                 ...state,
                 error: action.message
             };
+        case UPDATE_TASK:
+            // If the updated task is in the state, update it
+            const oldTaskIndex = state.data.findIndex(t => t._id == action.data._id);
+            if (oldTaskIndex != -1) {
+                const tasks = state.data.slice();
+                tasks[oldTaskIndex] = action.data;
+                return {
+                    ...state,
+                    data: tasks
+                };
+            }
         default:
             return state
     }

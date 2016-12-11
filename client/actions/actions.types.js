@@ -4,6 +4,7 @@
 
 // Tasks
 export const SELECT_TASK = 'SELECT_TASK';
+export const SELECT_TASK_ERROR = 'SELECT_TASK_ERROR';
 export const FETCH_TASKS = 'FETCH_TASKS';
 export const FETCH_TASKS_ERROR = 'FETCH_TASKS_ERROR';
 export const GET_TASK = 'CREATE_TASK';
