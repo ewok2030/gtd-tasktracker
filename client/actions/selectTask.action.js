@@ -1,10 +1,12 @@
-import {SELECT_TASK} from "./actions.types";
+import axios from "axios";
+import {SELECT_TASK, SELECT_TASK_ERROR} from "./actions.types";
 
-export const selectTask = (taskId) => {
-    return {
-        type: SELECT_TASK,
-        data: {
-            taskId: taskId
-        }
-    }
+export const selectTask = (id) => {
+    return function(dispatch) {
+        axios.get('/api/tasks/' + id).then((response) => {
+            dispatch({type: SELECT_TASK, data: response.data});
+        }).catch((response) => {
+            dispatch({type: SELECT_TASK_ERROR, error: response.data});
+        })
+    };
 }
