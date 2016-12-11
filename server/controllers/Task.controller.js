@@ -10,7 +10,7 @@ export function getTasks(req, res) {
 }
 
 export function getTask(req, res) {
-    Task.findOne({_id: req.params.id}).exec((err, doc) => {
+    Task.findById(req.params.id).exec((err, doc) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -34,8 +34,20 @@ export function addTask(req, res) {
     });
 }
 
+export function updateTask(req, res) {
+    Task.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    }, {new: true}).exec((err, doc) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json(doc);
+    });
+}
+
 export function deleteTask(req, res) {
-    Task.findOne({_id: req.params.id}).exec((err, doc) => {
+  // Task.findByIdAndRemove(id, options, callback)
+    Task.findById(req.params.id).exec((err, doc) => {
         if (err) {
             res.status(500).send(err);
         }

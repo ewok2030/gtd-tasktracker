@@ -1,9 +1,7 @@
-import {SELECT_TASK, FETCH_TASKS} from "../actions/actions.types"
+import {SELECT_TASK, FETCH_TASKS, UPDATE_TASK} from "../actions/actions.types"
 
 const initialState = {
-    data: {
-        id: ""
-    }
+    data: null
 }
 
 const activeTask = (state = initialState, action) => {
@@ -11,16 +9,22 @@ const activeTask = (state = initialState, action) => {
         case SELECT_TASK:
             return {
                 ...state,
-                data: { id: action.data.taskId }
+                data: action.data
             };
         case FETCH_TASKS:
-            if (state.data.id === "" && action.data.length > 0) {
+            if (state.data == null && action.data.length > 0) {
                 return {
                     ...state,
                     // If tasks have been fetched, make the first one active by default!
-                    data: {
-                        id: action.data[0]._id
-                    }
+                    data: action.data[0]
+                }
+            }
+        case UPDATE_TASK:
+            if (state.data != null && state.data._id === action.data._id) {
+                return {
+                    ...state,
+                    // If the active task has been updated...
+                    data: action.data
                 }
             }
         default:
