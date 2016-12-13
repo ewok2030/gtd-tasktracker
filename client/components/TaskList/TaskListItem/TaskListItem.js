@@ -37,11 +37,11 @@ export default class TaskListItem extends React.Component {
             : "";
         return (
             <a href="#" className={"list-group-item " + isActive} onClick={this.itemClicked.bind(this)}>
-                <h4 class="list-group-item-heading">
+                <h4 className="list-group-item-heading">
                     {this.renderIcon()}&nbsp;{this.props.title}
                     <span className="label label-default pull-right">{this.props.status}</span>
                 </h4>
-                <p class="list-group-item-text">{this.props.description}</p>
+                <p className="list-group-item-text">{this.props.description}</p>
             </a>
         );
     }
