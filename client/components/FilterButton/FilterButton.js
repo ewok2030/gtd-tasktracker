@@ -9,12 +9,12 @@ export default class FilterButton extends React.Component {
 
     render() {
         return (
-            <div class="button-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-filter"></span>&nbsp;Status
-                    <span class="caret"></span>
+            <div className="button-group">
+                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span className="glyphicon glyphicon-filter"></span>&nbsp;Status
+                    <span className="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul className="dropdown-menu">
                     {this.props.options.map(o => <FilterButtonOption key={o.label} label={o.label} isSelected={true}/>)}
                 </ul>
             </div>

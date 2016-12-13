@@ -18,19 +18,19 @@ export default class Header extends React.Component {
             : "";
 
         return (
-            <nav class="navbar navbar-inverse navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+            <nav className="navbar navbar-inverse navbar-static-top">
+                <div className="container">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
                         </button>
                         <IndexLink to="/" className="navbar-brand" activeClassName="active" onlyActiveOnIndex={true}>Get Things Done!</IndexLink>
                     </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
+                    <div id="navbar" className="navbar-collapse collapse">
+                        <ul className="nav navbar-nav">
                             <li class={tasksClass}>
                                 <Link to="tasks">Tasks</Link>
                             </li>
