@@ -11,11 +11,11 @@ export default class TaskStatusPicker extends React.Component {
 
     render() {
         return (
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {this.props.currentStatus}&nbsp;<span class="caret"></span>
+            <div className="btn-group">
+                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {this.props.currentStatus}&nbsp;<span className="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul className="dropdown-menu">
                     <li className="dropdown-header">Change the status</li>
                     {this.props.statusList.map(s => <TaskStatusPickerOption key={s.label} label={s.label} taskId={this.props.taskId} onClick={this.props.onClick}/>)}
                 </ul>
