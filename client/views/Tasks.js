@@ -10,10 +10,11 @@ import {selectTask} from "../actions/selectTask.action";
 import {fetchProjects} from "../actions/fetchProjects.action";
 import {selectProject} from "../actions/selectProject.action";
 import {updateTask} from "../actions/updateTask.action";
+import {editTask} from "../actions/editTask.action";
 
 // Map store state to component's properties
 const mapStateToProps = (state, ownProps) => {
-    return {tasks: state.fetchTasks.data, activeTask: state.activeTask.data, projects: state.fetchProjects.data};
+    return {tasks: state.fetchTasks.data, activeTask: state.activeTask.data, isActiveTaskEdited: state.activeTask.isEditing, projects: state.fetchProjects.data};
 };
 
 // Map actions to component's properties
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         selectProject: (projectId) => {
             dispatch(selectProject(projectId));
+        },
+        editTask: (id, prop) => {
+            dispatch(editTask(id, prop));
         },
         updateTask: (id, task) => {
             dispatch(updateTask(id, task));
@@ -53,12 +57,30 @@ export default class Tasks extends React.Component {
         this.props.fetchProjects();
     }
 
-    render() {
-        const editor = (this.props.activeTask == null)
-            ? <div className="well">
+    handleSelectTask(taskId) {
+        if (this.props.isActiveTaskEdited) {
+            var ok = confirm("There are unsaved changes. Clicking OK will discard changes.");
+            if (!ok) {
+                return;
+
+            }
+        }
+        this.props.selectTask(taskId);
+    }
+
+    renderEditor() {
+        if (this.props.activeTask == null) {
+            return (
+                <div className="well">
                     <small>Select a task to edit</small>
                 </div>
-            : <TaskEditor task={this.props.activeTask} updateTask={this.props.updateTask}/>;
+            );
+        } else {
+            return (<TaskEditor task={this.props.activeTask} editTask={this.props.editTask} saveTask={this.props.updateTask} isTaskEdited={this.props.isActiveTaskEdited}/>);
+        }
+    }
+
+    render() {
         return (
             <div>
                 <h2>{this.state.viewTitle}</h2>
@@ -68,10 +90,10 @@ export default class Tasks extends React.Component {
                             <ProjectList projects={this.props.projects} onClick={this.props.selectProject}/>
                         </div>
                         <div className="col-md-4">
-                            <TaskList tasks={this.props.tasks} onClick={this.props.selectTask} activeTask={this.props.activeTask}/>
+                            <TaskList tasks={this.props.tasks} onClick={this.handleSelectTask.bind(this)} activeTask={this.props.activeTask}/>
                         </div>
                         <div className="col-md-6">
-                            {editor}
+                            {this.renderEditor()}
                         </div>
                     </div>
                 </div>
