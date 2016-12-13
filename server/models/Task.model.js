@@ -6,12 +6,10 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    priority: {
-        type: Number,
-        required: true
-    },
     description: {
-        type: String
+        type: String,
+        default: "",
+        required: false
     },
     status: {
         type: String,
@@ -21,6 +19,11 @@ const taskSchema = new Schema({
         type: Date,
         default: Date.now,
         required: true
+    },
+    lastUpdated: {
+        type: Date,
+        default: null,
+        required: false
     },
     comments: [
         {
