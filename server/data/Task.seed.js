@@ -19,7 +19,7 @@ export default function() {
             if (!error) {
                 console.log('Task seeding complete!');
             } else {
-              console.log('Task error: ' + error.message)
+                console.log('Task error: ' + error.message)
             }
         });
     });

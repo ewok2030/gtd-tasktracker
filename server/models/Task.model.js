@@ -25,12 +25,6 @@ const taskSchema = new Schema({
         default: null,
         required: false
     },
-    comments: [
-        {
-            body: String,
-            date: Date
-        }
-    ],
     tags: [String]
 });
 
