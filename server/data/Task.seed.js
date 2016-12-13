@@ -17,7 +17,9 @@ export default function() {
             taskA1, taskA2, taskA3, taskB1, taskB2
         ], (error) => {
             if (!error) {
-                // console.log('ready to go....');
+                console.log('Task seeding complete!');
+            } else {
+              console.log('Task error: ' + error.message)
             }
         });
     });

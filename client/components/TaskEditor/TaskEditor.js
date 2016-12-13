@@ -48,7 +48,9 @@ export default class TaskEditor extends React.Component {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" id="description" value={this.props.task.description} onChange={this.updateProperty.bind(this)}/>
+                        <input type="text" class="form-control" id="description" value={(this.props.task.description == null)
+                            ? ""
+                            : this.props.task.description} onChange={this.updateProperty.bind(this)}/>
                     </div>
 
                 </div>
