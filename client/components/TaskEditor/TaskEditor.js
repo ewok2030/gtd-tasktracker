@@ -1,19 +1,34 @@
 import React from 'react';
 
-import TaskStatusPicker from '../TaskStatusPicker/TaskStatusPicker';
-
 export default class TaskEditor extends React.Component {
     static propTypes = {
         task: React.PropTypes.object.isRequired,
-        updateTask: React.PropTypes.func.isRequired
+        editTask: React.PropTypes.func.isRequired,
+        saveTask: React.PropTypes.func.isRequired,
+        isTaskEdited: React.PropTypes.bool.isRequired
+    }
+
+    handleSaveTask() {
+        this.props.saveTask(this.props.task._id, this.props.task);
     }
 
     updateProperty(event) {
         var newProp = new Object();
         newProp[event.target.id] = event.target.value;
-        this.props.updateTask(this.props.task._id, newProp);
+        this.props.editTask(this.props.task._id, newProp);
     }
 
+    renderButton() {
+        if (this.props.isTaskEdited) {
+            return (
+                <button className="btn btn-primary" onClick={this.handleSaveTask.bind(this)}>Save</button>
+            );
+        } else {
+            return (
+                <button className="btn btn-primary" disabled>Save</button>
+            );
+        }
+    }
     render() {
         const statusOptions = [
             {
@@ -27,6 +42,7 @@ export default class TaskEditor extends React.Component {
                 label: "Closed"
             }
         ];
+
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
@@ -36,11 +52,26 @@ export default class TaskEditor extends React.Component {
                     </span>
                 </div>
                 <div className="panel-body">
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select className="form-control" id="status" value={this.props.task.status} onChange={this.updateProperty.bind(this)}>
-                            {statusOptions.map(o => <option key={o._id} value={o.label}>{o.label}</option>)}
-                        </select>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <dl>
+                                <dt>Status</dt>
+                                <dd>
+                                    <select className="form-control" id="status" value={this.props.task.status} onChange={this.updateProperty.bind(this)}>
+                                        {statusOptions.map(o => <option key={o._id} value={o.label}>{o.label}</option>)}
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div className="col-md-4"></div>
+                        <div className="col-md-4">
+                            <dl>
+                                <dt>Date Created</dt>
+                                <dd>{this.props.task.dateCreated}</dd>
+                                <dt>Last Updated</dt>
+                                <dd>{this.props.task.lastUpdated}</dd>
+                            </dl>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -52,11 +83,10 @@ export default class TaskEditor extends React.Component {
                             ? ""
                             : this.props.task.description} onChange={this.updateProperty.bind(this)}/>
                     </div>
-
+                    {this.renderButton()}
                 </div>
                 <div className="panel-footer"></div>
             </div>
         );
     }
-
 }
