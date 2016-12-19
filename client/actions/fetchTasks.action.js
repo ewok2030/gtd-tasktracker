@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { FETCH_TASKS, FETCH_TASKS_ERROR } from './actions.types';
 
-export default function fetchTasks() {
-  return (dispatch) => {
+export const fetchTasks = () => {
+  return function (dispatch) {
     axios.get('/api/tasks').then((response) => {
       if (!Object.prototype.hasOwnProperty.call(response.data, 'value') && response.data.data instanceof Array) {
         response.data.value = response.data.data.length.toString();
@@ -12,4 +12,4 @@ export default function fetchTasks() {
       dispatch({ type: FETCH_TASKS_ERROR, error: response.data });
     });
   };
-}
+};

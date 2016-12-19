@@ -1,6 +1,6 @@
 import { EDIT_TASK } from './actions.types';
 
-export default function editTask(id, prop) {
+export const editTask = (id, prop) => {
   return {
     type: EDIT_TASK,
     data: {
@@ -8,4 +8,4 @@ export default function editTask(id, prop) {
       ...prop,
     },
   };
-}
+};

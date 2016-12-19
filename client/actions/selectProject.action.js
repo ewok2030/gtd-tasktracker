@@ -1,6 +1,6 @@
 import { SELECT_PROJECT } from './actions.types';
 
-export default function selectProject(projectId) {
+export const selectProject = (projectId) => {
   return {
     type: SELECT_PROJECT,
     data: {
