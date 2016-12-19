@@ -7,6 +7,7 @@ import store from "./store/index"
 // Views
 import Layout from './views/Layout';
 import Tasks from './views/Tasks';
+import TaskDetails from './views/TaskDetails';
 import Today from './views/Today';
 import Projects from './views/Projects';
 import Settings from './views/Settings';
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path="/" component={Layout}>
             <IndexRoute component={Today}></IndexRoute>
             <Route path="tasks" name="tasks" component={Tasks}></Route>
+            <Route path="tasks(/:taskId)" name="tasks" component={TaskDetails}></Route>
             <Route path="projects(/:project)" name="projects" component={Projects}></Route>
             <Route path="settings" name="settings" component={Settings}></Route>
         </Route>
