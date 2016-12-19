@@ -6,7 +6,7 @@ export default function() {
             return;
         }
         console.log("Seeding Tasks...")
-        const taskA3 = new Task({title: 'Test the solution', status: 'New', dateCreated: new Date()});
+        const taskA3 = new Task({title: 'Test the solution', status: 'New', dateCreated: new Date(), tags: ["foo", "bar", "test", "work"]});
         const taskA1 = new Task({title: 'Design the solution', status: 'In Progress', dateCreated: new Date()});
         const taskA2 = new Task({title: 'Build the solution', status: 'New', dateCreated: new Date()});
 
