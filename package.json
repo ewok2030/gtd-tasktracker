@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node --watch server ./server/server.js",
     "build": "webpack && babel server --out-dir build",
+    "lint": "eslint client server",
     "start": "cross-env NODE_ENV=production node build/server.js"
   },
   "repository": {
@@ -32,10 +33,15 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-promise-middleware": "^4.2.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2",
+    "html-webpack-plugin": "^2.24.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.8",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.19.0",
@@ -45,12 +51,14 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
     "css-loader": "^0.26.1",
-    "html-webpack-plugin": "^2.24.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "json-loader": "^0.5.4",
-    "nodemon": "^1.11.0",
-    "webpack": "^1.13.3",
-    "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.2"
+    "nodemon": "^1.11.0"
   },
   "babel": {
     "presets": [
