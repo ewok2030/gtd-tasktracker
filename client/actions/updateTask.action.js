@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { UPDATE_TASK, UPDATE_TASK_ERROR } from './actions.types';
 
-const updateTask = (id, newProps) => (dispatch) => {
+export const updateTask = (id, newProps) => (dispatch) => {
   axios.put(`/api/tasks/${id}`, { ...newProps, lastUpdated: new Date() }).then((response) => {
     dispatch({ type: UPDATE_TASK, data: response.data });
   }).catch((response) => {

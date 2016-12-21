@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_PROJECTS, FETCH_PROJECTS_ERROR } from './actions.types';
 
-const fetchProjects = () => (dispatch) => {
+export const fetchProjects = () => (dispatch) => {
   axios.get('/api/projects').then((response) => {
     dispatch({ type: FETCH_PROJECTS, data: response.data });
   }).catch((response) => {
