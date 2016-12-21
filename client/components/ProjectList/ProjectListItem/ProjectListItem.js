@@ -13,10 +13,10 @@ export default class ProjectListItem extends React.Component {
   }
   render() {
     return (
-      <a href="#" className="list-group-item" onClick={this.itemClicked.bind(this)}>
+      <button className="list-group-item" onClick={this.itemClicked.bind(this)}>
         <span className="badge">#</span>
         {this.props.name}
-      </a>
+      </button>
     );
   }
-};
+}

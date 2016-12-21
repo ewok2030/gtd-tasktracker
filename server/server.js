@@ -23,7 +23,6 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, (error) => {
   if (error) {
-    console.error('Please make sure Mongodb is installed and running!');
     throw error;
   }
 
@@ -85,9 +84,10 @@ if (isDevelopment) {
   });
 }
 
+/* eslint-disable*/
 app.listen(serverConfig.port, () => {
   console.log('App is running at http://localhost:%d in %s mode', serverConfig.port, app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });
-
+/* eslint-enable*/
 export default app;

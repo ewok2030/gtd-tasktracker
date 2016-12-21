@@ -2,13 +2,13 @@ import {
   SELECT_TASK,
   FETCH_TASKS,
   UPDATE_TASK,
-  EDIT_TASK
-} from "../actions/actions.types"
+  EDIT_TASK,
+} from '../actions/actions.types';
 
 const initialState = {
   data: null,
-  isEditing: false
-}
+  isEditing: false,
+};
 
 const activeTask = (state = initialState, action) => {
   switch (action.type) {
@@ -16,7 +16,7 @@ const activeTask = (state = initialState, action) => {
       return {
         ...state,
         data: action.data,
-        isEditing: false
+        isEditing: false,
       };
     case FETCH_TASKS:
       if (state.data == null && action.data.length > 0) {
@@ -24,32 +24,35 @@ const activeTask = (state = initialState, action) => {
           ...state,
           // If tasks have been fetched, make the first one active by default!
           data: action.data[0],
-          isEditing: false
-        }
+          isEditing: false,
+        };
       }
+      return state;
     case UPDATE_TASK:
       if (state.data != null && state.data._id === action.data._id) {
         return {
           ...state,
           // If the active task has been updated...
           data: action.data,
-          isEditing: false
-        }
+          isEditing: false,
+        };
       }
+      return state;
     case EDIT_TASK:
       if (state.data != null && state.data._id === action.data._id) {
         return {
           ...state,
           data: {
             ...state.data,
-            ...action.data
+            ...action.data,
           },
-          isEditing: true
+          isEditing: true,
         };
       }
+      return state;
     default:
-      return state
+      return state;
   }
 };
 
-export default activeTask
+export default activeTask;

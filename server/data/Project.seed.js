@@ -1,5 +1,5 @@
 import Project from '../models/Project.model';
-
+/* eslint-disable no-console */
 export default function () {
   Project.count().exec((err, count) => {
     if (count > 0) {

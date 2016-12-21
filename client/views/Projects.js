@@ -1,11 +1,12 @@
 import React from 'react';
 
 export default class Projects extends React.Component {
+  static propTypes = {
+    params: React.PropTypes.object.isRequired,
+  }
   render() {
-    const { query } = this.props.location;
     const { params } = this.props;
     const { project } = params;
-    const { date, filter } = query;
 
     const projectList = [
       'Some Article',

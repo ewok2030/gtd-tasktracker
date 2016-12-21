@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node --watch server ./server/server.js",
     "build": "webpack && babel server --out-dir build",
+    "lint": "eslint client server",
     "start": "cross-env NODE_ENV=production node build/server.js"
   },
   "repository": {
@@ -35,7 +36,8 @@
     "redux-thunk": "^2.1.0",
     "webpack": "^1.13.3",
     "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack-hot-middleware": "^2.13.2",
+    "html-webpack-plugin": "^2.24.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -55,7 +57,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
-    "html-webpack-plugin": "^2.24.1",
     "json-loader": "^0.5.4",
     "nodemon": "^1.11.0"
   },

@@ -13,38 +13,34 @@ import { updateTask } from '../actions/updateTask.action';
 import { editTask } from '../actions/editTask.action';
 
 // Map store state to component's properties
-function mapStateToProps(state) {
-  return {
-    tasks: state.fetchTasks.data,
-    activeTask: state.activeTask.data,
-    isActiveTaskEdited: state.activeTask.isEditing,
-    projects: state.fetchProjects.data,
-  };
-}
+const mapStateToProps = state => ({
+  tasks: state.fetchTasks.data,
+  activeTask: state.activeTask.data,
+  isActiveTaskEdited: state.activeTask.isEditing,
+  projects: state.fetchProjects.data,
+});
 
 // Map actions to component's properties
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchTasks: () => {
-      dispatch(fetchTasks());
-    },
-    selectTask: (taskId) => {
-      dispatch(selectTask(taskId));
-    },
-    fetchProjects: () => {
-      dispatch(fetchProjects());
-    },
-    selectProject: (projectId) => {
-      dispatch(selectProject(projectId));
-    },
-    editTask: (id, prop) => {
-      dispatch(editTask(id, prop));
-    },
-    updateTask: (id, task) => {
-      dispatch(updateTask(id, task));
-    },
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  fetchTasks: () => {
+    dispatch(fetchTasks());
+  },
+  selectTask: (taskId) => {
+    dispatch(selectTask(taskId));
+  },
+  fetchProjects: () => {
+    dispatch(fetchProjects());
+  },
+  selectProject: (projectId) => {
+    dispatch(selectProject(projectId));
+  },
+  editTask: (id, prop) => {
+    dispatch(editTask(id, prop));
+  },
+  updateTask: (id, task) => {
+    dispatch(updateTask(id, task));
+  },
+});
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Tasks extends React.Component {
@@ -75,7 +71,9 @@ export default class Tasks extends React.Component {
 
   handleSelectTask(taskId) {
     if (this.props.isActiveTaskEdited) {
+      /* eslint-disable no-alert */
       const ok = confirm('There are unsaved changes. Clicking OK will discard changes.');
+      /* eslint-enable no-alert */
       if (!ok) {
         return;
       }

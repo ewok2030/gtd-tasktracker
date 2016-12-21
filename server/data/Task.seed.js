@@ -1,5 +1,5 @@
 import Task from '../models/Task.model';
-
+/* eslint-disable no-console */
 export default function () {
   Task.count().exec((err, count) => {
     if (count > 0) {

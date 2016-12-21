@@ -1,11 +1,11 @@
 import {
   FETCH_TASKS,
   FETCH_TASKS_ERROR,
-  UPDATE_TASK
+  UPDATE_TASK,
 } from '../actions/actions.types';
 
 const initialState = {
-  data: []
+  data: [],
 };
 
 const fetchTasks = (state = initialState, action) => {
@@ -13,26 +13,28 @@ const fetchTasks = (state = initialState, action) => {
     case FETCH_TASKS:
       return {
         ...state,
-        data: action.data
+        data: action.data,
       };
     case FETCH_TASKS_ERROR:
       return {
         ...state,
-        error: action.message
+        error: action.message,
       };
-    case UPDATE_TASK:
+    case UPDATE_TASK: {
       // If the updated task is in the state, update it
-      const oldTaskIndex = state.data.findIndex(t => t._id == action.data._id);
-      if (oldTaskIndex != -1) {
+      const oldTaskIndex = state.data.findIndex(t => t._id === action.data._id);
+      if (oldTaskIndex !== -1) {
         const tasks = state.data.slice();
         tasks[oldTaskIndex] = action.data;
         return {
           ...state,
-          data: tasks
+          data: tasks,
         };
       }
+      return state;
+    }
     default:
-      return state
+      return state;
   }
 };
 

@@ -6,23 +6,19 @@ import TaskBoard from '../components/TaskBoard/TaskBoard';
 import { fetchTasks } from '../actions/fetchTasks.action';
 
 // Map store state to component's properties
-function mapStateToProps(state) {
-  return {
-    newTasks: state.fetchTasks.data.filter(t => t.status === 'New'),
-    committedTasks: state.fetchTasks.data.filter(t => t.status === 'Open'),
-    activeTasks: state.fetchTasks.data.filter(t => t.status === 'Active'),
-    completedTasks: state.fetchTasks.data.filter(t => t.status === 'Completed'),
-  };
-}
+const mapStateToProps = state => ({
+  newTasks: state.fetchTasks.data.filter(t => t.status === 'New'),
+  committedTasks: state.fetchTasks.data.filter(t => t.status === 'Open'),
+  activeTasks: state.fetchTasks.data.filter(t => t.status === 'Active'),
+  completedTasks: state.fetchTasks.data.filter(t => t.status === 'Completed'),
+});
 
 // Map actions to component's properties
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchTasks: () => {
-      dispatch(fetchTasks());
-    },
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  fetchTasks: () => {
+    dispatch(fetchTasks());
+  },
+});
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Today extends React.Component {
