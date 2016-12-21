@@ -1,5 +1,6 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import * as projectController from '../controllers/Project.controller';
+
 const router = new Router();
 
 // Get All
