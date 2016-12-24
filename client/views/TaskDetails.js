@@ -2,24 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 // Components
 import TaskEditor from '../components/TaskEditor/TaskEditor';
-// Actions
-import { selectTask } from '../actions/selectTask.action';
-import { updateTask } from '../actions/updateTask.action';
-import { editTask } from '../actions/editTask.action';
+// Module
+import { getTask, updateTask } from '../redux/modules/tasks';
 
 // Map store state to component's properties
 const mapStateToProps = state => ({
-  activeTask: state.activeTask.data,
-  isActiveTaskEdited: state.activeTask.isEditing,
+  task: state.tasks.active,
 });
 
 // Map actions to component's properties
 const mapDispatchToProps = dispatch => ({
-  selectTask: (taskId) => {
-    dispatch(selectTask(taskId));
-  },
-  editTask: (id, prop) => {
-    dispatch(editTask(id, prop));
+  getTask: (taskId) => {
+    dispatch(getTask(taskId));
   },
   updateTask: (id, task) => {
     dispatch(updateTask(id, task));
@@ -31,11 +25,9 @@ const mapDispatchToProps = dispatch => ({
 export default class TaskDetails extends React.Component {
   static propTypes = {
     params: React.PropTypes.object.isRequired,
-    selectTask: React.PropTypes.func.isRequired,
-    editTask: React.PropTypes.func.isRequired,
+    getTask: React.PropTypes.func.isRequired,
     updateTask: React.PropTypes.func.isRequired,
-    activeTask: React.PropTypes.object.isRequired,
-    isActiveTaskEdited: React.PropTypes.bool.isRequired,
+    task: React.PropTypes.object,
   }
 
   constructor(props) {
@@ -48,18 +40,35 @@ export default class TaskDetails extends React.Component {
   componentWillMount() {
     const { params } = this.props;
     const { taskId } = params;
-    this.props.selectTask(taskId);
+    this.props.getTask(taskId);
   }
 
+  handleOnSave = props => this.props.updateTask(this.props.task._id, props)
+
   renderEditor() {
-    if (this.props.activeTask == null) {
+    if (this.props.task == null) {
       return (
         <div className="well">
           <small>Select a task to edit</small>
         </div>
       );
     }
-    return (<TaskEditor task={this.props.activeTask} editTask={this.props.editTask} saveTask={this.props.updateTask} isTaskEdited={this.props.isActiveTaskEdited} />);
+    const statusOptions = [
+      {
+        _id: '1',
+        label: 'New',
+      }, {
+        _id: '2',
+        label: 'Open',
+      }, {
+        _id: '3',
+        label: 'Active',
+      }, {
+        _id: '4',
+        label: 'Completed',
+      },
+    ];
+    return (<TaskEditor statusList={statusOptions} initialValues={this.props.task} onSave={this.handleOnSave} />);
   }
 
   render() {

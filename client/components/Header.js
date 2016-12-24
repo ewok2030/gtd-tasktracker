@@ -8,8 +8,6 @@ export default class Header extends React.Component {
   render() {
     const { location } = this.props;
     const tasksClass = location.pathname.match(/^\/tasks/) ? 'active' : '';
-    const projectsClass = location.pathname.match(/^\/projects/) ? 'active' : '';
-    const settingsClass = location.pathname.match(/^\/settings/) ? 'active' : '';
 
     return (
       <nav className="navbar navbar-inverse navbar-static-top">
@@ -27,12 +25,6 @@ export default class Header extends React.Component {
             <ul className="nav navbar-nav">
               <li className={tasksClass}>
                 <Link to="tasks">Tasks</Link>
-              </li>
-              <li className={projectsClass}>
-                <Link to="projects">Projects</Link>
-              </li>
-              <li className={settingsClass}>
-                <Link to="settings">Settings</Link>
               </li>
             </ul>
           </div>
