@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 // Views
-import Layout from './views/Layout';
-import Tasks from './views/Tasks';
-import TaskDetails from './views/TaskDetails';
-import Today from './views/Today';
+import Layout from './containers/Layout';
+import Tasks from './containers/Tasks';
+import TaskDetails from './containers/TaskDetails';
+import Today from './containers/Today';
 
 const app = document.getElementById('app');
 ReactDOM.render(

@@ -10,7 +10,7 @@ export default class TaskListItem extends React.Component {
     isSelected: React.PropTypes.bool,
   }
 
-  itemClicked(event) {
+  itemClicked = (event) => {
     event.preventDefault();
     this.props.onClick(this.props.id);
   }
@@ -37,7 +37,7 @@ export default class TaskListItem extends React.Component {
             ? 'active'
             : '';
     return (
-      <button className={`list-group-item ${isActive}`} onClick={this.itemClicked.bind(this)}>
+      <button className={`list-group-item ${isActive}`} onClick={this.itemClicked}>
         <h4 className="list-group-item-heading">
           {this.renderIcon()}&nbsp;{this.props.title}
           <span className="label label-default pull-right">{this.props.status}</span>
