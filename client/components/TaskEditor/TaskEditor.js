@@ -1,88 +1,74 @@
 import React from 'react';
+// import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
+const renderField = field => (
+  <div className="form-group">
+    <label htmlFor={field.label}>{field.label}</label>
+    <input {...field.input} className="form-control" />
+    {field.touched && field.error && <div className="error">{field.error}</div>}
+  </div>
+);
+
+const renderSelect = field => (
+  <div className="form-group">
+    <label htmlFor={field.label}>{field.label}</label>
+    <select {...field.input} className="form-control">
+      {field.children}
+    </select>
+    {field.touched && field.error && <div className="error">{field.error}</div>}
+  </div>
+);
+
+const renderTextArea = field => (
+  <div className="form-group">
+    <label htmlFor={field.label}>{field.label}</label>
+    <textarea {...field.input} className="form-control" />
+  </div>
+);
+
+@reduxForm({ form: 'TaskEditor', enableReinitialize: true })
 export default class TaskEditor extends React.Component {
   static propTypes = {
-    task: React.PropTypes.object.isRequired,
-    editTask: React.PropTypes.func.isRequired,
-    saveTask: React.PropTypes.func.isRequired,
-    isTaskEdited: React.PropTypes.bool.isRequired,
+    onSave: React.PropTypes.func.isRequired,
+    statusList: React.PropTypes.array.isRequired,
+
+    // http://redux-form.com/6.0.0-rc.3/docs/api/ReduxForm.md/
+    initialValues: React.PropTypes.shape({
+      _id: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string.isRequired,
+      status: React.PropTypes.string.isRequired,
+      description: React.PropTypes.string }),
+    handleSubmit: React.PropTypes.func.isRequired,
+    reset: React.PropTypes.func.isRequired,
+    pristine: React.PropTypes.bool.isRequired,
+    invalid: React.PropTypes.bool.isRequired,
   }
 
-  handleSaveTask() {
-    this.props.saveTask(this.props.task._id, this.props.task);
-  }
-
-  updateProperty(event) {
-    const newProp = {};
-    newProp[event.target.id] = event.target.value;
-    this.props.editTask(this.props.task._id, newProp);
-  }
-
-  renderButton() {
-    if (this.props.isTaskEdited) {
-      return (
-        <button className="btn btn-primary" onClick={this.handleSaveTask.bind(this)}>Save</button>
-      );
-    }
-    return (<button className="btn btn-primary" disabled>Save</button>);
-  }
   render() {
-    const statusOptions = [
-      {
-        _id: '1',
-        label: 'New',
-      }, {
-        _id: '2',
-        label: 'Open',
-      }, {
-        _id: '3',
-        label: 'Closed',
-      },
-    ];
-
+    const { pristine, reset, invalid, handleSubmit, onSave } = this.props;
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
           <strong>Task Editor</strong>
           <span className="pull-right text-muted">
-            <small>{this.props.task._id}</small>
+            <small>{this.props.initialValues._id}</small>
           </span>
         </div>
         <div className="panel-body">
-          <div className="row">
-            <div className="col-md-4">
-              <dl>
-                <dt>Status</dt>
-                <dd>
-                  <select className="form-control" id="status" value={this.props.task.status} onChange={this.updateProperty.bind(this)}>
-                    {statusOptions.map(o => <option key={o._id} value={o.label}>{o.label}</option>)}
-                  </select>
-                </dd>
-              </dl>
-            </div>
-            <div className="col-md-4" />
-            <div className="col-md-4">
-              <dl>
-                <dt>Date Created</dt>
-                <dd>{this.props.task.dateCreated}</dd>
-                <dt>Last Updated</dt>
-                <dd>{this.props.task.lastUpdated}</dd>
-              </dl>
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input type="text" className="form-control" id="title" value={this.props.task.title} onChange={this.updateProperty.bind(this)} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input
-              type="text" className="form-control" id="description" value={(this.props.task.description == null)
-                            ? ''
-                            : this.props.task.description} onChange={this.updateProperty.bind(this)}
-            />
-          </div>
-          {this.renderButton()}
+          <form onSubmit={handleSubmit(onSave)}>
+
+            <Field name="title" type="text" component={renderField} label="Title" />
+
+            <Field name="status" component={renderSelect} label="Status">
+              {this.props.statusList.map(s => <option key={s._id} value={s.label}>{s.label}</option>)}
+            </Field>
+
+            <Field name="description" component={renderTextArea} label="Description" />
+
+            <button action="submit" disabled={pristine || invalid} className="btn btn-primary">Submit</button>
+            <button type="button" disabled={pristine} onClick={reset} className="btn btn-default">Undo</button>
+          </form>
         </div>
         <div className="panel-footer" />
       </div>

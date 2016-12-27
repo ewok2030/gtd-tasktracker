@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 // Components
 import TaskBoard from '../components/TaskBoard/TaskBoard';
 // Actions
-import { fetchTasks } from '../actions/fetchTasks.action';
+import { fetchTasks } from '../redux/modules/tasks';
 
 // Map store state to component's properties
 const mapStateToProps = state => ({
-  newTasks: state.fetchTasks.data.filter(t => t.status === 'New'),
-  committedTasks: state.fetchTasks.data.filter(t => t.status === 'Open'),
-  activeTasks: state.fetchTasks.data.filter(t => t.status === 'Active'),
-  completedTasks: state.fetchTasks.data.filter(t => t.status === 'Completed'),
+  tasks: state.tasks.data,
 });
 
 // Map actions to component's properties
@@ -23,11 +20,8 @@ const mapDispatchToProps = dispatch => ({
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Today extends React.Component {
   static propTypes = {
+    tasks: React.PropTypes.array.isRequired,
     fetchTasks: React.PropTypes.func.isRequired,
-    newTasks: React.PropTypes.array.isRequired,
-    committedTasks: React.PropTypes.array.isRequired,
-    activeTasks: React.PropTypes.array.isRequired,
-    completedTasks: React.PropTypes.array.isRequired,
   }
 
   constructor(props) {
@@ -46,10 +40,10 @@ export default class Today extends React.Component {
       <div>
         <h2>{this.state.viewTitle}</h2>
         <TaskBoard
-          newTasks={this.props.newTasks}
-          committedTasks={this.props.committedTasks}
-          activeTasks={this.props.activeTasks}
-          completedTasks={this.props.completedTasks}
+          newTasks={this.props.tasks.filter(t => t.status === 'New')}
+          committedTasks={this.props.tasks.filter(t => t.status === 'Open')}
+          activeTasks={this.props.tasks.filter(t => t.status === 'Active')}
+          completedTasks={this.props.tasks.filter(t => t.status === 'Completed')}
         />
       </div>
     );
