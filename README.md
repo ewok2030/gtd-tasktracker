@@ -13,13 +13,21 @@ This project is to be a single user app for tracking tasks.
 
 In mostly no particular order:
 
-* Update the webpack configuration to remove the need for server side to load the webpack-dev-server
-* Add support for styling via sass, bootstrap, and sass-loader
-* Add support for drag-n-drop of task cards
 * Add [react-tagsinput](https://github.com/olahol/react-tagsinput) for tagging
+* Add support for commenting
+* Add task management feature, status:
+  * new ->
+  * committed -> due date, estimated hours
+  * in progress -> remaining hours
+  * done -> actual hours
+* Add support for drag-n-drop of task cards
+* Add a activity log for everything done
 * Add search feature to find tasks, projects, and tagged items (with [react-autosuggestion](https://github.com/moroshko/react-autosuggest))
+* Update the webpack configuration to remove the need for server side to load the webpack-dev-server
 * Reorganize the static resources on the client side (templates -> static, add stylesheets, etc.)
+* Add support for styling via sass, bootstrap, and sass-loader
 * Decide on a new name for the project
+* Add support for tracking changes (history?)
 
 ## Project Structure
 
